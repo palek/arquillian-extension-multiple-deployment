@@ -18,7 +18,7 @@ import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.core.spi.LoadableExtension;
 import org.jboss.arquillian.test.spi.TestClass;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.api.Archive;
 
 /**
  * Registers the {@link FlexibleRegisterDeployment} which allows to choose the {@link Deployment}
@@ -74,7 +74,7 @@ public class DeploymentRegisterer implements LoadableExtension {
 			deployment = getMethodForDeployment(testClass, getTargetContainer());
 
 			try {
-				WebArchive result = (WebArchive) deployment.invoke(testClass);
+				Archive<?> result = (Archive<?>) deployment.invoke(testClass);
 
 				return Arrays.asList(new DeploymentDescription("On-the-fly deployment", result));
 			} catch (Exception e) {
